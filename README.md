@@ -19,6 +19,7 @@ MVT-WDD-BF: python BFprediction.py --gamma=8 --lam=32 --parapath=/your_path/BFpa
 
 After executing the script, the predcition will be printed at STDOUT as follows:
 > python KNNprediction.py --gamma=0.125 --parapath=/your_path/parameter.pk --datapath=templatedata/template_data_fill.csv
+
 y_true: tensor([1, 0])
 y_pred: tensor([1, 0])
 

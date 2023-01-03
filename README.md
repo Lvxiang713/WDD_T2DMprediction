@@ -21,11 +21,14 @@ For prediction code, the basic usage is:
 
 For example:
 
-WDD-KNN: python KNNprediction.py --gamma=0.125 --parapath=/your_path/parameter.pk --datapath=templatedata/template_data_fill.csv
+WDD-KNN:  
+  python KNNprediction.py --gamma=0.125 --parapath=/your_path/parameter.pk --datapath=templatedata/template_data_fill.csv
 
-MVT-WDD-DI: python DIprediction.py --gamma=1 --delta=0.25 --parapath=/your_path/DIpara.pk --datapath=templatedata/template_data_nofill.csv
+MVT-WDD-DI:  
+  python DIprediction.py --gamma=1 --delta=0.25 --parapath=/your_path/DIpara.pk --datapath=templatedata/template_data_nofill.csv
 
-MVT-WDD-BF: python BFprediction.py --gamma=8 --lam=32 --parapath=/your_path/BFpara.pk --datapath=templatedata/template_data_nofill.csv
+MVT-WDD-BF:   
+  python BFprediction.py --gamma=8 --lam=32 --parapath=/your_path/BFpara.pk --datapath=templatedata/template_data_nofill.csv
 
 After executing the script, the predcition will be printed at STDOUT as follows:
 >python KNNprediction.py --gamma=0.125 --parapath=/your_path/parameter.pk --datapath=templatedata/template_data_fill.csv

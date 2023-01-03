@@ -3,7 +3,9 @@ The code in this repository is for predicting T2DM. K-nearest neighbor imputatio
 
 For training code, the basic usage is:
 'python <trainingFile> <hyper-parameters> <dataFile>' 
-For example:
+
+  For example:
+
 WDD-KNN: python KNNtrain.py --gamma=0.125 --data_path=yourdata.csv --out_Path=/anyPath
   
 MVT-WDD-DI: python DItrain.py --gamma=1 --delta=0.25 --data_path=yourdata.csv --out_Path=/anyPath

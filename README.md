@@ -20,8 +20,8 @@ MVT-WDD-BF: python BFprediction.py --gamma=8 --lam=32 --parapath=/your_path/BFpa
 After executing the script, the predcition will be printed at STDOUT as follows:
 > python KNNprediction.py --gamma=0.125 --parapath=/your_path/parameter.pk --datapath=templatedata/template_data_fill.csv
 
-y_true: tensor([1, 0])
-y_pred: tensor([1, 0])
+>y_true: tensor([1, 0])
+>y_pred: tensor([1, 0])
 
 Below are the brief explanation of the parameters:
 trainingFile: the file contains the training steps, currently the <Modelname>train.py files  in the root path of the repository are available. Besides, <Modelname>model.py files  in the root path is used as a library for  trainingFile.

@@ -17,7 +17,7 @@ After training, the output will be stored in a .pk file called <trained-paramete
 
 For prediction code, the basic usage is:
   
-`python <predictionFile> <hyper-parameters><trained-parametersFile> <dataFile>`
+`python <predictionFile> <hyper-parameters> <trained-parametersFile> <dataFile>`
 
 For example:
 
@@ -28,7 +28,7 @@ MVT-WDD-DI: python DIprediction.py --gamma=1 --delta=0.25 --parapath=/your_path/
 MVT-WDD-BF: python BFprediction.py --gamma=8 --lam=32 --parapath=/your_path/BFpara.pk --datapath=templatedata/template_data_nofill.csv
 
 After executing the script, the predcition will be printed at STDOUT as follows:
-> python KNNprediction.py --gamma=0.125 --parapath=/your_path/parameter.pk --datapath=templatedata/template_data_fill.csv
+>python KNNprediction.py --gamma=0.125 --parapath=/your_path/parameter.pk --datapath=templatedata/template_data_fill.csv
 
 >y_true: tensor([1, 0])
 >y_pred: tensor([1, 0])

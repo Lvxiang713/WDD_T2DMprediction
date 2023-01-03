@@ -2,7 +2,8 @@
 The code in this repository is for predicting T2DM. K-nearest neighbor imputation and two missing value tolerance weighted diversity density algorithms (WDD-KNN, MVT-WDD-DI and MVT-WDD-BF) were included.
 
 For training code, the basic usage is:
-'python <trainingFile> <hyper-parameters> <dataFile>' 
+
+`python <trainingFile> <hyper-parameters> <dataFile>` 
 
 For example:
 
@@ -15,7 +16,8 @@ MVT-WDD-BF: python BFtrain.py --gamma=8 --lam=32 --data_path=yourdata.csv --out_
 After training, the output will be stored in a .pk file called <trained-parametersFile>. The performance of the 10-fold cross validation will be stored in score.txt.  All of these output files could be found in out_Path.
 
 For prediction code, the basic usage is:
-'python <predictionFile> <hyper-parameters><trained-parametersFile> <dataFile>' 
+  
+`python <predictionFile> <hyper-parameters><trained-parametersFile> <dataFile>`
 
 For example:
 
@@ -32,6 +34,7 @@ After executing the script, the predcition will be printed at STDOUT as follows:
 >y_pred: tensor([1, 0])
 
 Below are the brief explanation of the parameters:
+
 trainingFile: the file contains the training steps, currently the <Modelname>train.py files  in the root path of the repository are available. Besides, <Modelname>model.py files in the root path is used as a library for trainingFile.
 
 dataFile : for both training and prediction steps, the data format should be the same as the .csv file in the folder templatedata.

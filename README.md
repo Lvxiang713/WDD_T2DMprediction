@@ -13,7 +13,7 @@ MVT-WDD-DI: python DItrain.py --gamma=1 --delta=0.25 --data_path=yourdata.csv --
   
 MVT-WDD-BF: python BFtrain.py --gamma=8 --lam=32 --data_path=yourdata.csv --out_Path=/anyPath
 
-After training, the output will be stored in a .pk file called <trained-parametersFile>. The performance of the 10-fold cross validation will be stored in score.txt.  All of these output files could be found in out_Path.
+After training, the output will be stored in a .pk file. The performance of the 10-fold cross validation will be stored in score.txt. All of these output files could be found in out_Path.
 
 For prediction code, the basic usage is:
   

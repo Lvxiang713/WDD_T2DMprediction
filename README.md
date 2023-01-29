@@ -7,13 +7,13 @@ For training code, the basic usage is:
 
 For example:
 
-WDD-KNN: python KNNtrain.py --gamma=0.125 --data_path=yourdata.csv --out_Path=/anyPath
+WDD-KNN: python KNNtrain.py --gamma=0.125 --data_path=yourdata.csv --out_path=/anyPath
   
-MVT-WDD-DI: python DItrain.py --gamma=1 --delta=0.25 --data_path=yourdata.csv --out_Path=/anyPath
+MVT-WDD-DI: python DItrain.py --gamma=1 --delta=0.25 --data_path=yourdata.csv --out_path=/anyPath
   
-MVT-WDD-BF: python BFtrain.py --gamma=8 --lam=32 --data_path=yourdata.csv --out_Path=/anyPath
+MVT-WDD-BF: python BFtrain.py --gamma=8 --lam=32 --data_path=yourdata.csv --out_path=/anyPath
 
-After training, the output will be stored in a .pk file. The performance of the 10-fold cross validation will be stored in score.txt. All of these output files could be found in out_Path.
+After training, the output will be stored in a .pk file. The performance of the 10-fold cross validation will be stored in score.txt. All of these output files could be found in out_path.
 
 For prediction code, the basic usage is:
   
@@ -40,7 +40,7 @@ Below are the brief explanation of the parameters:
 
 trainingFile: the file contains the training steps, currently the <Modelname>train.py files  in the root path of the repository are available. Besides, <Modelname>model.py files in the root path is used as a library for trainingFile.
 
-dataFile : for both training and prediction steps, the data format should be the same as the .csv file in the folder templatedata.
+dataFile : for both training and prediction steps, the data format should be the same as the .csv file in the folder templatedata.We provided 16,004 electronic medical records stored in data.csv for reproduction.For more detailed information such as indicator names, please contact the authors.
 
 trained-parametersFile：these parameters are obtained after model training, which are saved as the .pk file. These files can be found in folder parameter. 
 

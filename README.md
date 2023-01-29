@@ -7,13 +7,13 @@ For training code, the basic usage is:
 
 For example:
 
-WDD-KNN: python KNNtrain.py --gamma=0.125 --data_path=yourdata.csv --out_Path=/anyPath
+WDD-KNN: python KNNtrain.py --gamma=0.125 --data_path=yourdata.csv --out_path=/anyPath
   
-MVT-WDD-DI: python DItrain.py --gamma=1 --delta=0.25 --data_path=yourdata.csv --out_Path=/anyPath
+MVT-WDD-DI: python DItrain.py --gamma=1 --delta=0.25 --data_path=yourdata.csv --out_path=/anyPath
   
-MVT-WDD-BF: python BFtrain.py --gamma=8 --lam=32 --data_path=yourdata.csv --out_Path=/anyPath
+MVT-WDD-BF: python BFtrain.py --gamma=8 --lam=32 --data_path=yourdata.csv --out_path=/anyPath
 
-After training, the output will be stored in a .pk file. The performance of the 10-fold cross validation will be stored in score.txt. All of these output files could be found in out_Path.
+After training, the output will be stored in a .pk file. The performance of the 10-fold cross validation will be stored in score.txt. All of these output files could be found in out_path.
 
 For prediction code, the basic usage is:
   

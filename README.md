@@ -40,7 +40,7 @@ Below are the brief explanation of the parameters:
 
 trainingFile: the file contains the training steps, currently the <Modelname>train.py files  in the root path of the repository are available. Besides, <Modelname>model.py files in the root path is used as a library for trainingFile.
 
-dataFile : for both training and prediction steps, the data format should be the same as the .csv file in the folder templatedata.
+dataFile : for both training and prediction steps, the data format should be the same as the .csv file in the folder templatedata.We provided 16,004 electronic medical records stored in data.csv for reproduction.For more detailed information such as indicator names, please contact the authors.
 
 trained-parametersFile：these parameters are obtained after model training, which are saved as the .pk file. These files can be found in folder parameter. 
 

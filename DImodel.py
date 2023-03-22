@@ -230,71 +230,78 @@ def val(point,op_m,tmpW,gamma,delta):
     pro = torch.exp(-gamma*(torch.matmul(ed,tmpW)/(num_notnan**delta)))
     return pro
 
-def CV_score(X_train,y_train,X_test,y_test, gamma,delta,op_list,w_list):
+def CV_score(X_train,y_train,X_test,y_test,gamma,delta,op_list,w_list,device = 'cuda:0',dtype=torch.float32):
     score_list = []
     score_list1 = []
-    bagp_train_list = []
-    bagn_train_list = []
-    bagp_list = []
-    bagn_list = []
-
-    for idx,i in enumerate(X_train):
-        tmp = torch.tensor(i)
-        if y_train[idx] == 1:
-            bagp_train_list.append(tmp)
-        else:
-            bagn_train_list.append(tmp)  
-    for idx,i in enumerate(X_test):
-        tmp = torch.tensor(i)
-        if y_test[idx] == 1:
-            bagp_list.append(tmp) 
-        else:
-            bagn_list.append(tmp)       
+            
     auc_list = []
     y_pred_list = []
+    
     
     for i in range(1):
         op_m = op_list[i]
         tmpW = w_list[i]
         y_train_pred=[]
         y_pred = []
+        glu_score = []
         
-        for idx,i in enumerate(bagp_train_list):
-            y_train_pred.append(max(val(i.to(device),op_m,tmpW,gamma,delta)).cpu().detach().numpy())
-        for idx,i in enumerate(bagn_train_list):
-            y_train_pred.append(max(val(i.to(device),op_m,tmpW,gamma,delta)).cpu().detach().numpy())
-        for idx,i in enumerate(bagp_list):
-            y_pred.append(max(val(i.to(device),op_m,tmpW,gamma,delta)).cpu().detach().numpy())
-        for idx,i in enumerate(bagn_list):
-            y_pred.append(max(val(i.to(device),op_m,tmpW,gamma,delta)).cpu().detach().numpy())
+        for idx,i in enumerate(X_train):
+            tmp = torch.tensor(i,dtype=dtype)
+            y_train_pred.append(max(val(tmp.to(device),op_m,tmpW,gamma,delta)).cpu().detach().numpy())
+
             
-        y_train_pred = np.array(y_train_pred)
-        y_pred = np.array(y_pred)
-        y_pred_list.append(y_pred)
-        fpr, tpr, thresholds = metrics.roc_curve(y_train, y_train_pred, pos_label=1,drop_intermediate=False)
-        arg = tpr-fpr
-        Youden_index = np.argmax(arg) 
-        optimal_threshold = thresholds[Youden_index]
-        fpr, tpr, thresholds = metrics.roc_curve(y_test, y_pred, pos_label=1,drop_intermediate=False)
-        Auc = metrics.auc(fpr, tpr)
-        auc_list.append(Auc)
-        y_pred1 = (y_pred>optimal_threshold)
-        Acc = accuracy_score(y_test, y_pred1)
-        Pre = precision_score(y_test, y_pred1)
-        Recall = recall_score(y_test, y_pred1)
-        F1_score = f1_score(y_test, y_pred1)
-        # plt.plot([0,1], [0,1],'k--',lw=3)
-        # plt.plot(fpr, tpr, '-.', label='ROC (area = {0:.3f})'.format(Auc), lw=3, color = 'red')
-        # plt.xlim([-0.05, 1.05])  
-        # plt.ylim([-0.05, 1.05])
-        # plt.xlabel('False Positive Rate')
-        # plt.ylabel('True Positive Rate') 
-        # plt.title('ROC Curve')
-        # plt.legend(loc="lower right")
-        # plt.show()
-        score_list.append(('Auc:%f'%Auc, 'Acc:%f'%Acc, 'Pre:%f'%Pre, 'Recall:%f'%Recall, 'F1_score:%f'%F1_score))
-        score_list1.append((Auc,Acc,Pre,Recall,F1_score))
+        # for idx,i in enumerate(bagn_train_list):
+        #     y_train_pred.append(max(self.val(i.to(self.device),op_m,tmpW)).cpu().detach().numpy())
+        
+
+        
+        for idx,i in enumerate(X_test):
+            tmp = torch.tensor(i,dtype=dtype)
+            y_pred.append(max(val(tmp.to(device),op_m,tmpW,gamma,delta)).cpu().detach().numpy())
+   
+    y_train_pred = np.array(y_train_pred)
+    
+       
+        
+    y_pred = np.array(y_pred)
+    y_pred_list.append(y_pred)
+    
+    
+    
+    fpr, tpr, thresholds = metrics.roc_curve(y_train, y_train_pred, pos_label=1,drop_intermediate=False)
+
+
+    arg = tpr-fpr
+    Youden_index = np.argmax(arg) 
+    
+    optimal_threshold = thresholds[Youden_index]##寻找最优阈值
+    
+    
+    fpr, tpr, thresholds = metrics.roc_curve(y_test, y_pred, pos_label=1,drop_intermediate=False)
+    Auc = metrics.auc(fpr, tpr)
+    auc_list.append(Auc)
+    
+    
+    y_pred1 = (y_pred>optimal_threshold)##y_pred输出为概率，y_pred1输出为0，1
+    Acc = accuracy_score(y_test, y_pred1)
+    Pre = precision_score(y_test, y_pred1)
+    Recall = recall_score(y_test, y_pred1)
+    F1_score = f1_score(y_test, y_pred1)
+    # plt.plot([0,1], [0,1],'k--',lw=3)
+    # plt.plot(fpr, tpr, '-.', label='ROC (area = {0:.3f})'.format(Auc), lw=3, color = 'red')
+
+    # plt.xlim([-0.05, 1.05])  # 设置x、y轴的上下限，以免和边缘重合，更好的观察图像的整体
+    # plt.ylim([-0.05, 1.05])
+    # plt.xlabel('False Positive Rate')
+    # plt.ylabel('True Positive Rate')  # 可以使用中文，但需要导入一些库即字体
+    # plt.title('ROC Curve')
+    # plt.legend(loc="lower right")
+    # plt.show()
+    
+    score_list.append(('Auc:%f'%Auc, 'Acc:%f'%Acc, 'Pre:%f'%Pre, 'Recall:%f'%Recall, 'F1_score:%f'%F1_score))
+    score_list1.append((Auc,Acc,Pre,Recall,F1_score))
     return score_list,score_list1,fpr,tpr,optimal_threshold
 
+  
         
         

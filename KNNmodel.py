@@ -198,7 +198,7 @@ def val(point,op_m,tmpW,gamma):
     pro = torch.exp(-gamma*torch.matmul((point-op_m)**2, tmpW))
     return pro
 
-def CV_score(X_train,y_train,X_test,y_test, glu_test,gamma,op_list,w_list,device = 'cuda:0',dtype=torch.float32):
+def CV_score(X_train,y_train,X_test,y_test,gamma,op_list,w_list,device = 'cuda:0',dtype=torch.float32):
     score_list = []
     score_list1 = []
             
@@ -221,7 +221,6 @@ def CV_score(X_train,y_train,X_test,y_test, glu_test,gamma,op_list,w_list,device
         for idx,i in enumerate(X_test):
             tmp = torch.tensor(i,dtype=dtype)
             y_pred.append(max(val(tmp.to(device),op_m,tmpW,gamma)).cpu().detach().numpy())
-            glu_score.append((max(val(tmp.to(device),op_m,tmpW,gamma)).cpu().detach().numpy(),glu_test[idx],1))
         
         
     y_train_pred = np.array(y_train_pred)
@@ -255,6 +254,6 @@ def CV_score(X_train,y_train,X_test,y_test, glu_test,gamma,op_list,w_list,device
     
     score_list.append(('Auc:%f'%Auc, 'Acc:%f'%Acc, 'Pre:%f'%Pre, 'Recall:%f'%Recall, 'F1_score:%f'%F1_score))
     score_list1.append((Auc,Acc,Pre,Recall,F1_score))
-    return score_list,score_list1,fpr,tpr,glu_score,optimal_threshold
+    return score_list,score_list1,fpr,tpr,optimal_threshold
         
         
